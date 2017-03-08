@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Created by huangfeng on 2017/3/8.
- * 改例子展示了原子引用的缺陷，如果一个线程修改了值，又将其改了回去，另外一个线程不会发现这个变化
+ * 该例子展示了原子引用的缺陷，如果一个线程修改了值，又将其改了回去，另外一个线程不会发现这个变化
  * 对于这个变化敏感的场景，则是不合适的
  */
 public class AtomicReferenceDemo {
