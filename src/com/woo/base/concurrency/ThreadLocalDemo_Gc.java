@@ -51,7 +51,7 @@ public class ThreadLocalDemo_Gc {
         public void run() {
             try {
                 if (t1.get() == null) {
-                    t1.set(new SimpleDateFormat("") {
+                    t1.set(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") {
                         protected void finalize() throws Throwable {
                             System.out.println(this.toString() + " is gc !");
                         }
@@ -60,7 +60,7 @@ public class ThreadLocalDemo_Gc {
                 }
                 Date t = t1.get().parse("2017-10-12 19:32:" + i % 60);
             } catch (Exception e) {
-                //  e.printStackTrace();
+                  e.printStackTrace();
             } finally {
                 cd.countDown();
 
