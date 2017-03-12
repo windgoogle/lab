@@ -10,7 +10,7 @@ public class AtomicIntegerFieldUpdaterDemo {
 
     public static class Candidate {
         int id;
-        volatile  int score;   //不能是私有或保护变量
+        volatile  int score;   //不能是私有或保护变量，换句话说是必须对AtomicIntegerFieldUpdater可见
     }
 
     public final static AtomicIntegerFieldUpdater scoreUpdator=AtomicIntegerFieldUpdater.newUpdater(Candidate.class,"score");
