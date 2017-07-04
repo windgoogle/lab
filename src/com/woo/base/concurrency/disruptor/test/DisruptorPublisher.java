@@ -14,6 +14,7 @@ public class DisruptorPublisher implements EventPublisher {
     private TestEventHandler handler;
     private RingBuffer<TestEvent> ringbuffer;
     private ExecutorService executor;
+
     public DisruptorPublisher(int bufferSize, TestHandler handler) {
         this.handler = new TestEventHandler(handler);
         executor = Executors.newSingleThreadExecutor();

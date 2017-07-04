@@ -62,5 +62,7 @@ public class CountTask extends RecursiveTask<Long> {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        pool.shutdown();
     }
 }
