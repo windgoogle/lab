@@ -26,7 +26,7 @@ public class FileAttributeViewDemo {
             System.out.println("system: "+attrs.isSystem());
             System.out.println("airchive: "+attrs.isArchive());
             System.out.println("hidden: "+attrs.isHidden());
-            System.out.println("director: "+attrs.isDirectory());
+            System.out.println("directory: "+attrs.isDirectory());
             System.out.println("createTime: "+attrs.creationTime());
             System.out.println("size: "+attrs.size());
             System.out.println("lastAccessTime: "+attrs.lastAccessTime());
