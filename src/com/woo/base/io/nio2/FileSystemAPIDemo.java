@@ -1,14 +1,15 @@
 package com.woo.base.io.nio2;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FileSystemAPIDemo {
 
@@ -52,5 +53,15 @@ public class FileSystemAPIDemo {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         Files.copy(newFile, output);
         Files.delete(newFile);
+    }
+
+    public void addFileToZip2(File zipFile, File fileToAdd) throws IOException {
+        Map<String, String> env = new HashMap<>();
+        env.put("create", "true");
+        try (FileSystem fs = FileSystems.newFileSystem(URI.create("jar:" + zipFile.toURI()), env)) {
+            Path pathToAddFile = fileToAdd.toPath();
+            Path pathInZipfile = fs.getPath("/" + fileToAdd.getName());
+            Files.copy(pathToAddFile, pathInZipfile, StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 }
