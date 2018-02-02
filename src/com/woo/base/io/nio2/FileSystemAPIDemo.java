@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +16,12 @@ public class FileSystemAPIDemo {
 
     public static void main(String[] args) throws IOException {
         //usePath();
-        //listFiles();
-        manipulateFiles();
+       // listFiles();
+       // manipulateFiles();
+        long t1=System.currentTimeMillis();
+        copyDir(Paths.get("e:","svn\\twnt"),Paths.get("e:","test\\tw6"));
+        long t2=System.currentTimeMillis();
+        System.out.println("耗时："+(t2-t1)/1000+" 秒");
     }
 
 
@@ -33,11 +38,35 @@ public class FileSystemAPIDemo {
     }
 
     public static void listFiles() throws IOException {
-        Path path = Paths.get("d:","svn\\tw6","ejb","openejb-core\\src\\main\\java\\com\\tongweb\\tongejb\\");
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*.java")) {
+        Path path = Paths.get("e:","svn\\twnt");
+        Path path2 = Paths.get("e:","svn\\twnt");
+        Path path3 = Paths.get("e:","test\\tw6");
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*")) {
             for (Path entry: stream) {
                 //使用entry
                 System.out.println(entry);
+
+               // System.out.println("----root:"+entry.getRoot());
+                //System.out.println("-----parent : "+entry.getParent().toAbsolutePath());
+                //System.out.println("-----subpath : "+entry.subpath(0,3));
+                //System.out.println("-----relative : "+entry.relativize(path2));
+                System.out.println("-----getNameCount : "+path.getNameCount());
+                int nameCount=entry.getNameCount();
+                int p_nameCount=path2.getNameCount();
+                Path newPath=entry.subpath(p_nameCount,nameCount);
+                newPath=path3.resolve(newPath);
+
+                System.out.println("------"+newPath);
+                File dir=entry.toFile();
+                if(dir.isDirectory()) {
+                    File des=newPath.toFile();
+                    if(!des.exists()){
+                        des.mkdir();
+                    }
+                }else {
+                    //Path newFile=Files.createFile(newPath);
+                    Files.copy(entry, newPath,StandardCopyOption.REPLACE_EXISTING);
+                }
             }
         }
     }
@@ -62,6 +91,33 @@ public class FileSystemAPIDemo {
             Path pathToAddFile = fileToAdd.toPath();
             Path pathInZipfile = fs.getPath("/" + fileToAdd.getName());
             Files.copy(pathToAddFile, pathInZipfile, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+
+
+    public static void copyDir(Path srcDir,Path desDir) {
+
+        int desNameCount=desDir.getNameCount();
+
+
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(srcDir, "*")) {
+            for (Path entry: stream) {
+                int nameCount=entry.getNameCount();
+                Path newPath=desDir.resolve(entry.subpath(desNameCount,nameCount));
+
+                if(Files.isDirectory(entry)){
+                    if(!Files.exists(newPath)) {
+                        Files.createDirectory(newPath);
+                    }
+                    copyDir(entry,newPath);
+
+                }else {
+                    Files.copy(entry, newPath,StandardCopyOption.REPLACE_EXISTING,StandardCopyOption.COPY_ATTRIBUTES);
+                }
+
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 }
