@@ -19,7 +19,8 @@ public class FileSystemAPIDemo {
        // listFiles();
        // manipulateFiles();
         long t1=System.currentTimeMillis();
-        copyDir(Paths.get("e:","svn\\twnt"),Paths.get("e:","test\\tw6"));
+        System.out.println("复制文件......");
+        copyDir(Paths.get("e:","svn\\tw7-tools\\Tomee_Converter\\tomcat_tomee_src\\tomee-src.zip_converted"),Paths.get("e:","test\\tw7"));
         long t2=System.currentTimeMillis();
         System.out.println("耗时："+(t2-t1)/1000+" 秒");
     }
@@ -38,7 +39,7 @@ public class FileSystemAPIDemo {
     }
 
     public static void listFiles() throws IOException {
-        Path path = Paths.get("e:","svn\\twnt");
+        Path path = Paths.get("e:","svn\\tw7-tools\\Tomee_Converter\\tomcat_tomee_src\\tomee-src.zip_converted");
         Path path2 = Paths.get("e:","svn\\twnt");
         Path path3 = Paths.get("e:","test\\tw6");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(path, "*")) {
@@ -46,27 +47,6 @@ public class FileSystemAPIDemo {
                 //使用entry
                 System.out.println(entry);
 
-               // System.out.println("----root:"+entry.getRoot());
-                //System.out.println("-----parent : "+entry.getParent().toAbsolutePath());
-                //System.out.println("-----subpath : "+entry.subpath(0,3));
-                //System.out.println("-----relative : "+entry.relativize(path2));
-                System.out.println("-----getNameCount : "+path.getNameCount());
-                int nameCount=entry.getNameCount();
-                int p_nameCount=path2.getNameCount();
-                Path newPath=entry.subpath(p_nameCount,nameCount);
-                newPath=path3.resolve(newPath);
-
-                System.out.println("------"+newPath);
-                File dir=entry.toFile();
-                if(dir.isDirectory()) {
-                    File des=newPath.toFile();
-                    if(!des.exists()){
-                        des.mkdir();
-                    }
-                }else {
-                    //Path newFile=Files.createFile(newPath);
-                    Files.copy(entry, newPath,StandardCopyOption.REPLACE_EXISTING);
-                }
             }
         }
     }
@@ -96,19 +76,37 @@ public class FileSystemAPIDemo {
 
 
     public static void copyDir(Path srcDir,Path desDir) {
+        if(Files.notExists(srcDir)) {
+            System.out.println("源目录不存在！");
+            return;
+        }
+
+        if(Files.notExists(desDir)){
+            try {
+                Files.createDirectory(desDir);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
 
         int desNameCount=desDir.getNameCount();
-
-
+        int srcNameCount=srcDir.getNameCount();
+        int startIndex=Math.max(desNameCount,srcNameCount);
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(srcDir, "*")) {
             for (Path entry: stream) {
                 int nameCount=entry.getNameCount();
-                Path newPath=desDir.resolve(entry.subpath(desNameCount,nameCount));
-
+                Path newPath=desDir.resolve(entry.subpath(startIndex,nameCount));
+                //System.out.println("-----"+newPath);
                 if(Files.isDirectory(entry)){
-                    if(!Files.exists(newPath)) {
+                    if(Files.notExists(newPath)) {
                         Files.createDirectory(newPath);
+                    }else {
+                        if(Files.deleteIfExists(newPath)){
+                            Files.createDirectory(newPath);
+                        }
                     }
+
+
                     copyDir(entry,newPath);
 
                 }else {
