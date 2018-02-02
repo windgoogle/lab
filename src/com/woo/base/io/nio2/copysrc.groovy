@@ -48,8 +48,8 @@ class Copy {
                         Files.createDirectory(newPath);
                     }else {
                         if(!Files.isDirectory(newPath)){
-                            if(Files.delete(newPath))
-                                Files.createDirectory(newPath);
+                            Files.delete(newPath);
+                            Files.createDirectory(newPath);
                         }
                     }
 
