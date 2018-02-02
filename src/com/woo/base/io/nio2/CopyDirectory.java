@@ -46,8 +46,9 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        System.out.println("----visitFile : "+file);
+        System.out.print("----copy file : "+file);
         Files.copy(file,getDestFilePath(file,destDir),StandardCopyOption.REPLACE_EXISTING,StandardCopyOption.COPY_ATTRIBUTES);
+        System.out.println("  ok !");
         return FileVisitResult.CONTINUE;
     }
 
@@ -59,7 +60,7 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-        System.out.println("----postVisitDirectory : "+dir);
+
         return FileVisitResult.CONTINUE;
     }
 
