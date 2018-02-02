@@ -6,9 +6,16 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class CopyDirectory extends SimpleFileVisitor<Path> {
 
-    private Path destDir=Paths.get("E:\\test\\tc");
-    private Path srcDir=Paths.get("E:","svn","TOMCAT_7_0_82");
-    private int destRootIndex=getDestRootIndex();
+    private Path destDir;
+    private Path srcDir;
+    private int rootIndex;
+
+
+    public CopyDirectory(String src,String dest) {
+        this.srcDir=Paths.get(src);
+        this.destDir=Paths.get(dest);
+        rootIndex=srcDir.getNameCount();
+    }
 
     private int getDestRootIndex() {
         int srcNameCount=srcDir.getNameCount();
@@ -16,9 +23,9 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
     }
 
     private Path getDestFilePath(Path srcDir,Path destDir) {
-      if(destRootIndex>=srcDir.getNameCount())
+      if(rootIndex>=srcDir.getNameCount())
           return destDir;
-      return destDir.resolve(srcDir.subpath(destRootIndex,srcDir.getNameCount()));
+      return destDir.resolve(srcDir.subpath(rootIndex,srcDir.getNameCount()));
 
     }
 
@@ -57,11 +64,11 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
     }
 
     public static void main(String[] args) throws IOException {
-        CopyDirectory visitor=new CopyDirectory ();
-        Path path= Paths.get("E:","svn","TOMCAT_7_0_82");
+        CopyDirectory visitor=new CopyDirectory (args[0],args[1]);
+
         System.out.println("copy begin .....");
         long t1=System.currentTimeMillis();
-        Files.walkFileTree(path,visitor);
+        Files.walkFileTree(visitor.srcDir,visitor);
         long t2=System.currentTimeMillis();
         System.out.println("copy end , escaped time "+(t2-t1)/1000+" seconds .");
     }
