@@ -89,6 +89,6 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
             msg = "copy success [success:"+visitor.fileCount+"] !";
         }
 
-        System.out.println("check is  complete ,escaped time " + (t2 - t1) / 1000 + " seconds......."+ msg);
+        System.out.println("check is complete ,escaped time " + (t2 - t1) / 1000 + " seconds......."+ msg);
     }
 }

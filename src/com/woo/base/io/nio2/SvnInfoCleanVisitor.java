@@ -38,7 +38,7 @@ public class SvnInfoCleanVisitor extends SimpleFileVisitor<Path> {
 
     public static void main(String[] args) throws IOException {
         SvnInfoCleanVisitor visitor=new SvnInfoCleanVisitor();
-        Path path= Paths.get("F:","svn","openwebbeans1.7.0");
+        Path path= Paths.get("E:","svn","TOMCAT_7_0_82");
         Files.walkFileTree(path,visitor);
     }
 }
