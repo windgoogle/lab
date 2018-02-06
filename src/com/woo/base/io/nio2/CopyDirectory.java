@@ -35,8 +35,8 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
             Files.createDirectory(dest);
         else{
             if(!Files.isDirectory(dest)) {
-                Files.delete(dest);
-                Files.createDirectory(dest);
+                if(Files.deleteIfExists(dest))
+                    Files.createDirectory(dest);
             }
         }
         return FileVisitResult.CONTINUE;
