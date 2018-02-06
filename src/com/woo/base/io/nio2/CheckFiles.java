@@ -60,7 +60,7 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
     public static void main(String[] args) throws IOException {
         CheckFiles visitor=new CheckFiles (args[0],args[1]);
 
-        System.out.println("check begin .....");
+        System.out.println("check .......");
         long t1=System.currentTimeMillis();
         Files.walkFileTree(visitor.srcDir,visitor);
         long t2=System.currentTimeMillis();

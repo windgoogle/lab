@@ -67,7 +67,7 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
     public static void main(String[] args) throws IOException {
         CopyDirectory visitor=new CopyDirectory (args[0],args[1]);
 
-        System.out.println("copy begin .....");
+        System.out.println("copy .........");
         long t1=System.currentTimeMillis();
         Files.walkFileTree(visitor.srcDir,visitor);
         long t2=System.currentTimeMillis();
