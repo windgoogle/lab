@@ -2,6 +2,7 @@ package com.woo.base.io.nio2;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
 
 public class CheckFiles extends SimpleFileVisitor<Path> {
 
@@ -44,11 +45,11 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
         }else {
             long srcSize=Files.size(file);
             long destSize=Files.size(dest);
-            if(srcSize!=destSize) {
-                System.out.println("[file] " + dest + ".........size ["+destSize+"] not matched source file size["+srcSize+"] !");
-                errorCount++;
-            }else {
+
+            if(checkFileSize(file,dest)&&checkFileLastModifiedTime(file,dest)) {
                 fileCount++;
+            }else {
+                errorCount++;
             }
 
 
@@ -56,6 +57,23 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
+    private boolean checkFileSize(Path src,Path dest) throws IOException{
+        long srcSize=Files.size(src);
+        long destSize=Files.size(dest);
+        boolean matched=(srcSize==destSize);
+         if(!matched)
+             System.out.println("[file] " + dest + ".........size ["+destSize+"] not matched source file size["+srcSize+"] !");
+        return matched;
+    }
+
+    private boolean checkFileLastModifiedTime(Path src,Path dest) throws IOException{
+        FileTime srcFileTime=Files.getLastModifiedTime(src);
+        FileTime destFileTime=Files.getLastModifiedTime(dest);
+        boolean matched=srcFileTime.equals(destFileTime);
+        if(!matched)
+            System.out.println("[file] " + dest + ".........last modified time ["+destFileTime+"] not matched source file ["+srcFileTime+"] !");
+        return matched;
+    }
 
     public static void main(String[] args) throws IOException {
         CheckFiles visitor=new CheckFiles (args[0],args[1]);
