@@ -10,6 +10,7 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
     private int rootIndex;
     private long missedCount=0;
     private long errorCount=0;
+    private long fileCount=0;
 
     public CheckFiles(String src,String dest) {
         this.srcDir=Paths.get(src);
@@ -46,7 +47,11 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
             if(srcSize!=destSize) {
                 System.out.println("[file] " + dest + ".........size ["+destSize+"] not matched source file size["+srcSize+"] !");
                 errorCount++;
+            }else {
+                fileCount++;
             }
+
+
         }
         return FileVisitResult.CONTINUE;
     }
@@ -61,9 +66,9 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
         long t2=System.currentTimeMillis();
         String msg=" ";
         if(visitor.errorCount>0||visitor.missedCount>0) {
-            msg = "copy failed[error:"+visitor.errorCount+",miss:"+visitor.missedCount+"]!";
+            msg = "copy failed[success:"+visitor.fileCount+",error:"+visitor.errorCount+",miss:"+visitor.missedCount+"]!";
         }else {
-            msg = " copy success !";
+            msg = "copy success [success:"+visitor.fileCount+"] !";
         }
 
         System.out.println("check is  complete ,escaped time " + (t2 - t1) / 1000 + " seconds......."+ msg);

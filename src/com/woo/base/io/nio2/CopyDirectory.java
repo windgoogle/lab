@@ -9,6 +9,7 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
     private Path destDir;
     private Path srcDir;
     private int rootIndex;
+    private long fileCount=0;
 
 
     public CopyDirectory(String src,String dest) {
@@ -47,6 +48,7 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
         System.out.print("----copy [file] "+file);
         Files.copy(file,getDestFilePath(file,destDir),StandardCopyOption.REPLACE_EXISTING,StandardCopyOption.COPY_ATTRIBUTES);
         System.out.println(".........ok !");
+        fileCount++;
         return FileVisitResult.CONTINUE;
     }
 
@@ -69,6 +71,6 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
         long t1=System.currentTimeMillis();
         Files.walkFileTree(visitor.srcDir,visitor);
         long t2=System.currentTimeMillis();
-        System.out.println("copy is complete , escaped time "+(t2-t1)/1000+" seconds .");
+        System.out.println("copy is complete ("+visitor.fileCount+" files copied .), escaped time "+(t2-t1)/1000+" seconds .");
     }
 }
