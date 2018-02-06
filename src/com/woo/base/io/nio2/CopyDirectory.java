@@ -14,12 +14,11 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
     public CopyDirectory(String src,String dest) {
         this.srcDir=Paths.get(src);
         this.destDir=Paths.get(dest);
-        rootIndex=srcDir.getNameCount();
+        rootIndex=getDestRootIndex();
     }
 
     private int getDestRootIndex() {
-        int srcNameCount=srcDir.getNameCount();
-        return srcNameCount;
+        return srcDir.getNameCount();
     }
 
     private Path getDestFilePath(Path srcDir,Path destDir) {
@@ -31,7 +30,6 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        System.out.println("----preVisistDirectory : "+dir);
         Path dest=getDestFilePath(dir,destDir);
         if(Files.notExists(dest))
             Files.createDirectory(dest);
@@ -46,9 +44,9 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        System.out.print("----copy file : "+file);
+        System.out.print("----copy [file] "+file);
         Files.copy(file,getDestFilePath(file,destDir),StandardCopyOption.REPLACE_EXISTING,StandardCopyOption.COPY_ATTRIBUTES);
-        System.out.println("  ok !");
+        System.out.println(".........ok !");
         return FileVisitResult.CONTINUE;
     }
 
@@ -71,6 +69,6 @@ public class CopyDirectory extends SimpleFileVisitor<Path> {
         long t1=System.currentTimeMillis();
         Files.walkFileTree(visitor.srcDir,visitor);
         long t2=System.currentTimeMillis();
-        System.out.println("copy end , escaped time "+(t2-t1)/1000+" seconds .");
+        System.out.println("copy is complete , escaped time "+(t2-t1)/1000+" seconds .");
     }
 }

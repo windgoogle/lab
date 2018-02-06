@@ -34,11 +34,17 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
         Path dest=getDestFilePath(file,destDir);
         //System.out.println("----"+dest);
         if(Files.notExists(dest)) {
-            System.out.println("file : " + dest + " missed !");
+            System.out.println("[file] " + dest + ".........missed !");
             missedCount++;
-        }else{
-            if(Files.isDirectory(dest)) {
+        }else if(Files.isDirectory(dest)) {
                 System.out.println(dest+" is a directory!");
+                errorCount++;
+
+        }else {
+            long srcSize=Files.size(file);
+            long destSize=Files.size(dest);
+            if(srcSize!=destSize) {
+                System.out.println("[file] " + dest + ".........size ["+destSize+"] not matched source file size["+srcSize+"] !");
                 errorCount++;
             }
         }
@@ -55,11 +61,11 @@ public class CheckFiles extends SimpleFileVisitor<Path> {
         long t2=System.currentTimeMillis();
         String msg=" ";
         if(visitor.errorCount>0||visitor.missedCount>0) {
-            msg = "copy failed  [error:"+visitor.errorCount+",miss:"+visitor.missedCount+"]!";
-            System.out.println("check complete . "+msg+" escaped time " + (t2 - t1) / 1000 + " seconds .");
+            msg = "copy failed[error:"+visitor.errorCount+",miss:"+visitor.missedCount+"]!";
         }else {
             msg = " copy success !";
-            System.out.println("check complete . "+msg+" escaped time " + (t2 - t1) / 1000 + " seconds .");
         }
+
+        System.out.println("check is  complete ,escaped time " + (t2 - t1) / 1000 + " seconds......."+ msg);
     }
 }
