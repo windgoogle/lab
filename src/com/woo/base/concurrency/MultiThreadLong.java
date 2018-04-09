@@ -18,7 +18,7 @@ public class MultiThreadLong {
 
            while(true) {
                MultiThreadLong.t=t0;
-               Thread.yield();
+               Thread.yield(); //放弃CPU使用，但是不释放锁
            }
         }
     }
