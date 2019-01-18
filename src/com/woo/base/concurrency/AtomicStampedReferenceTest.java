@@ -23,7 +23,7 @@ public class AtomicStampedReferenceTest {
                     while(true) {
                         //Integer current = integer.getReference(); //正确
                         int current=integer.getReference();    //错误
-                        System.out.println("curent:"+current);
+                        System.out.println("current:"+current);
                         if (integer.compareAndSet(current, current + 1, timestamp, timestamp + 1)) {
                             break;
                         }
