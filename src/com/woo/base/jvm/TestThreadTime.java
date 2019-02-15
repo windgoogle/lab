@@ -109,7 +109,7 @@ public class TestThreadTime {
 
         });
         t1.setName("test-1");
-        t1.setName("test-2");
+        t2.setName("test-2");
         t1.start();
         t2.start();
 
