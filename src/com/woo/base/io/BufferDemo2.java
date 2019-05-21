@@ -43,5 +43,19 @@ public class BufferDemo2 {
         System.out.println("buffer remaining: "+ byteBuffer.remaining());
         //flip() 和clear() 用于读和写的切换，flip()调用，可以读buffer了，clear后可以写buffer了
 
+        byteBuffer.put((byte)'h').put((byte)'i').put((byte)'j').put((byte)'k').put((byte)'l').put((byte)'m').put((byte)'n');
+        byteBuffer.flip();
+        byteBuffer.get();
+        byteBuffer.get();
+        byteBuffer.get();
+
+
+        System.out.println("buffer compact: "+ byteBuffer.compact());
+        System.out.println("========================after buffer compact =====================");
+        System.out.println("limit="+byteBuffer.limit());
+        System.out.println("position="+byteBuffer.position());
+        byteBuffer.flip();
+
+
     }
 }

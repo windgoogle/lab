@@ -13,7 +13,7 @@ public class AsciiPic {
 
     /**
      * @param path
-     *            图片路径
+     * 图片路径
      */
     public static void createAsciiPic(final String path) {
          final String base = "@#&$%*o!;.";// 字符串由复杂到简单

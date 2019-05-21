@@ -16,7 +16,7 @@ public class ForkJoin {
         ForkJoinPool pool = new ForkJoinPool();
         ForkJoinTask<Long> task = new ForkJoinCalculate(0L, 10000000000L);
 
-        long sum = pool.invoke(task);
+        long sum = pool.invoke(task);     //invoke == submit + get
         System.out.println(sum);
 
         long end = System.currentTimeMillis();

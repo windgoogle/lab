@@ -118,6 +118,7 @@ public class TestThreadTime {
     static class ThreadUtil {
         /**
          * Get CPU time in nanoseconds.
+         * 返回当前线程的总 CPU 时间（以毫微秒为单位）。
          */
 
         public static long getCpuTime() {
@@ -132,6 +133,7 @@ public class TestThreadTime {
 
         /**
          * Get user time in nanoseconds.
+         * 返回当前线程在用户模式中执行的 CPU 时间（以毫微秒为单位）。
          */
 
         public static long getUserTime() {

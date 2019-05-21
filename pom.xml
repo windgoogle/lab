@@ -38,6 +38,11 @@
 			<artifactId>javapoet</artifactId>
 			<version>1.10.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+			<version>5.10.2</version>
+		</dependency>
         <dependency>
 		<groupId>org.jodd</groupId>
 		<artifactId>jodd-xxx</artifactId>
@@ -56,8 +61,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>7</source>
+					<target>7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
