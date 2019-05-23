@@ -5,6 +5,10 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 
+
+/**
+ * 弱引用，和引用队列关联的例子
+ */
 public class ReferenceTest {
 
     private static ReferenceQueue<VeryBig> rq = new ReferenceQueue<VeryBig>();

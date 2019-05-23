@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * Created by huangfeng on 2017/7/3.
+ * 这是个软引用
  */
 public class HardReference<T>  extends SoftReference<T> {
     private final T hard;

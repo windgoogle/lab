@@ -2,6 +2,7 @@ package com.woo.base.refrence;
 
 /**
  * Created by huangfeng on 2017/7/4.
+ * 这是个强引用
  */
 public class CommonReferenceTest {
     private static Person person;
