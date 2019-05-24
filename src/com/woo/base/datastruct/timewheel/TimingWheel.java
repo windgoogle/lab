@@ -45,8 +45,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class TimingWheel<E> {
 
-    private final long tickDuration;
-    private final int ticksPerWheel;
+    private final long tickDuration;   //tick 一下的时间长度
+    private final int ticksPerWheel;   //每轮有多少个槽位
     private final CopyOnWriteArrayList<ExpirationListener<E>> expirationListeners = new CopyOnWriteArrayList<ExpirationListener<E>>();
     private final ArrayList<Slot<E>> wheel;
     private final Map<E, Slot<E>> indicator = new ConcurrentHashMap<E, Slot<E>>();
