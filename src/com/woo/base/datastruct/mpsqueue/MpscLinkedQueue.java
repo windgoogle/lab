@@ -33,6 +33,8 @@ import java.util.*;
  * 尾节点next=null
  * 新加入元素插入尾节点后部
  * 获取元素从头节点next开始拿，拿完后变为头结点，旧的头结点从链表中解除
+ *
+ *
  * A lock-free concurrent single-consumer multi-producer {@link Queue}.
  * It allows multiple producer threads to perform the following operations simultaneously:
  * <ul>
