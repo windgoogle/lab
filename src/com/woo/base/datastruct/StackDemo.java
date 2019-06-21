@@ -21,6 +21,7 @@ public class StackDemo {
 
         for(int i=0;i<100000;i++) {
             queueStack.push(test);
+            queueStack.push("test-"+i);
         }
 
     }
