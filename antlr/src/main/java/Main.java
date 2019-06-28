@@ -34,5 +34,7 @@ public class Main {
             System.out.println("Input expr:"+s);
             run(s);
         }
+
+        //run("a+(b*3");
     }
 }
