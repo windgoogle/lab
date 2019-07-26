@@ -19,6 +19,7 @@ public class SemaphoreDemo implements Runnable {
             System.out.println(Thread.currentThread().getId() + " done !");
             semaphore.release();
 
+
         }catch (InterruptedException e){
             e.printStackTrace();
         }
