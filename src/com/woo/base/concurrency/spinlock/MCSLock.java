@@ -48,6 +48,8 @@ public class MCSLock {
                 // 如果当前节点的后续节点为null，则需要等待其不为null（参考加锁方法）
                 while (currentNode.next == null) {
                 }
+
+                //?????这儿没有设置currentNode.next.isLocked = false; 如何让其他线程获得锁？？？？？
             }
         } else {
             // 如果不为null，表示有线程在等待获取锁，此时将等待线程对应的节点锁状态更新为false，同时将当前线程的后继节点设为null
