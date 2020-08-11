@@ -5,7 +5,8 @@ import java.io.*;
 public class Test {
 
     public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException {
-        User user = new User();
+       /*
+        User user = new User("小明");
         user.setAge("22");
         user.setName("小明");
         user.setPassword("admin");
@@ -19,6 +20,15 @@ public class Test {
         User users = (User) ois.readObject();
 
         System.out.println(users.getAge() + "\t" + users.getName() + "\t" + users.getPassword());
+
+        */
+       String url="/api/asdo/sdfsdf.js";
+       int index=url.toLowerCase().lastIndexOf(".");
+       String suffix="";
+       if(index>-1){
+           suffix=url.substring(index+1);
+       }
+        System.out.println("-----"+suffix);
    }
 
 }

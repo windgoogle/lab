@@ -62,6 +62,15 @@
 		</dependency>
 
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>bintray-nitram509-jbrotli</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/nitram509/jbrotli</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>

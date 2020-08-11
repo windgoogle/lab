@@ -3,6 +3,13 @@ package com.woo.base.Serializable;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    public User () throws Exception {
+        throw  new Exception("does not suppport!");
+    }
+
+    public User (String name)  {
+      this.name=name;
+    }
     private static final long serialVersionUID = 1L;
     private static String age;
     private String name;
