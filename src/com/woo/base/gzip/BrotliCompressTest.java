@@ -33,7 +33,7 @@ public class BrotliCompressTest {
         System.out.println("----brotli outLength : "+compressedBuf.length+" ,ratio : "+ratio(compressedBuf.length,deCompressBufSize)+"， cost : "+(t2-t1) +" ms .");
 
         byte[] decompressedBuf =brotliDecompress(compressedBuf);
-        System.out.println("--------after brotli  decompress : "+new String(decompressedBuf));
+       // System.out.println("--------after brotli  decompress : "+new String(decompressedBuf));
 
         System.out.println("gzip :    ");
         long t3=System.currentTimeMillis();
@@ -43,7 +43,7 @@ public class BrotliCompressTest {
 
         byte[] gzipDecompressedBuf =gzipDecompress(gzipCompressedBuf);
 
-        System.out.println("-----------after gzip decompress : "+new String(gzipDecompressedBuf));
+     //   System.out.println("-----------after gzip decompress : "+new String(gzipDecompressedBuf));
 
     }
 

@@ -4,8 +4,12 @@
 	<groupId>com.woo</groupId>
 	<artifactId>lab</artifactId>
 	<version>1.0.1</version>
-	<name>lab</name>
-	<packaging>jar</packaging>
+    <modules>
+        <module>antlr</module>
+        <module>undertow</module>
+    </modules>
+    <name>lab</name>
+	<packaging>pom</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>io.netty</groupId>
