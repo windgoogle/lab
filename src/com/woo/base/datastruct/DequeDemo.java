@@ -22,5 +22,11 @@ public class DequeDemo {
             System.out.println(deque.pop());
         }
         System.out.println(deque);
+        deque.offer("a");
+        deque.offer("b");
+        deque.offer("c");
+        System.out.println(deque);
+        System.out.println(deque.poll());
+
     }
 }
