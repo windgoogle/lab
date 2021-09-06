@@ -57,7 +57,7 @@ public class SynchronousQueueExample {
     }
 
     public static void main(String[] args) {
-        final BlockingQueue<String> synchronousQueue = new SynchronousQueue<String>(false);
+        final BlockingQueue<String> synchronousQueue = new SynchronousQueue<String>(true);
 
         SynchronousQueueProducer queueProducer = new SynchronousQueueProducer(
                 synchronousQueue);
