@@ -33,7 +33,7 @@ public class ConTest {
             try {
                 lock.lock();
                 System.out.println("我在等一个新信号"+this.currentThread().getName());
-                condition.await();
+                condition.await(); //主动释放了锁？？？？？？
 
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
