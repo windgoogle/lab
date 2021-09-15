@@ -14,12 +14,12 @@ public class Main {
         //String webappDirLocation = "src/main/webapp/";
         String webappDirLocation="C:\\Users\\hzy20\\Desktop\\WebTest";
         Tomcat tomcat = new Tomcat();
-
+        tomcat.setBaseDir("C:\\Users\\hzy20\\Desktop");
         //The port that we should run on can be set into an environment variable
         //Look for that variable and default to 8080 if it isn't there.
         String webPort = System.getenv("PORT");
         if(webPort == null || webPort.isEmpty()) {
-            webPort = "8080";
+            webPort = "18080";
         }
 
         tomcat.setPort(Integer.valueOf(webPort));
