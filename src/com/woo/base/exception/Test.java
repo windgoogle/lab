@@ -5,11 +5,9 @@ public class Test {
     public static void main(String[] args) throws Exception {
         try {
             try {
-                // 模拟一个可能发生的异常
-                if (3 > 2) {
-                    throw new Exception("结果大于2的异常");
-                }
-
+               Thread thread= new Thread(new Cal());
+               thread.setName("test-thread");
+                thread.start();
             }catch(Exception e){
                 throw new ArithmeticException("计算错误");
             }finally{
@@ -18,5 +16,24 @@ public class Test {
         } finally {
             System.out.println("外层 finally 块执行。");
         }
+
+        Thread.sleep(10000);
     }
-}
+
+  public static class Cal implements Runnable  {
+      @Override
+      public void run() {
+          try {
+              if (3 > 2) {
+                  throw new Exception("结果大于2的异常");
+              }
+          } catch (Exception e) {
+              throw new RuntimeException(e);
+          } finally {
+              System.out.println(" finally 块执行。");
+          }
+      }
+      }
+  }
+
+
