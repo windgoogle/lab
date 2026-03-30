@@ -4,13 +4,9 @@
 	<groupId>com.woo</groupId>
 	<artifactId>lab</artifactId>
 	<version>1.0.1</version>
-    <modules>
-        <module>antlr</module>
-        <module>undertow</module>
-        <module>embed</module>
-    </modules>
+
     <name>lab</name>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -81,12 +77,13 @@
 			<artifactId>commons-compress</artifactId>
 			<version>1.20</version>
 		</dependency>
-
+            <!--
 			<dependency>
 				<groupId>org.meteogroup.jbrotli</groupId>
 				<artifactId>jbrotli</artifactId>
 				<version>0.5.0</version>
 			</dependency>
+			-->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
@@ -134,8 +131,31 @@
 			<artifactId>security-api</artifactId>
 			<version>1.1-rev-1</version>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.24.0</version> <!-- 需2.9.0及以上版本才支持Zstd -->
+        </dependency>
+        <dependency>
+            <groupId>com.github.luben</groupId>
+            <artifactId>zstd-jni</artifactId>
+            <version>1.5.5-10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jcommander</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>3.0</version>
+        </dependency>
 
-	</dependencies>
+            <!-- XZ压缩库 -->
+            <dependency>
+                <groupId>org.tukaani</groupId>
+                <artifactId>xz</artifactId>
+                <version>1.9</version> <!-- 使用最新的稳定版本 -->
+            </dependency>
+
+
+    </dependencies>
 
 	<repositories>
 		<repository>
@@ -157,21 +177,7 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>assembly</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
 
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>
